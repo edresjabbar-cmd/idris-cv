@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Idris Jabbar Karim - CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --bg-primary: #0f0f1a;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --bg-card2: #1a1a35;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --text-primary: #f0f0ff;
+      --text-secondary: #a0a0c0;
+      --border: rgba(108,99,255,0.25);
+      --shadow: 0 8px 32px rgba(108,99,255,0.18);
+      --glow: 0 0 24px rgba(108,99,255,0.35);
+    }
+    [data-theme="light"] {
+      --bg-primary: #f5f6fa;
+      --bg-secondary: #eef0fb;
+      --bg-card: #ffffff;
+      --bg-card2: #f0f1ff;
+      --text-primary: #1a1a35;
+      --text-secondary: #5a5a8a;
+      --border: rgba(108,99,255,0.18);
+      --shadow: 0 8px 32px rgba(108,99,255,0.12);
+      --glow: 0 0 20px rgba(108,99,255,0.18);
+    }
+    [data-color="purple"] { --accent: #6c63ff; --accent2: #ff6584; }
+    [data-color="blue"]   { --accent: #2196f3; --accent2: #00e5ff; }
+    [data-color="green"]  { --accent: #00c776; --accent2: #43e97b; }
+    [data-color="orange"] { --accent: #ff9800; --accent2: #ff6584; }
+    [data-color="pink"]   { --accent: #e91e8c; --accent2: #b721ff; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Noto Kufi Arabic', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      transition: background 0.4s, color 0.4s;
+      overflow-x: hidden;
+    }
+    [dir="rtl"] body,
+    body[dir="rtl"] {
+      font-family: 'Noto Kufi Arabic', 'Inter', sans-serif;
+    }
+
+    /* ===== TOOLBAR ===== */
+    .toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 30px;
+      background: rgba(15,15,26,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.4s;
+    }
+    [data-theme="light"] .toolbar {
+      background: rgba(245,246,250,0.95);
+    }
+    .toolbar-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-btn {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      color: var(--text-primary);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .lang-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .theme-toggle {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      color: var(--text-primary);
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.25s;
+    }
+    .theme-toggle:hover { background: var(--accent); color: #fff; }
+
+    .color-swatches { display: flex; gap: 7px; align-items: center; }
+    .swatch {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2.5px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .swatch:hover { transform: scale(1.28); }
+    .swatch.active { border-color: var(--text-primary); box-shadow: 0 0 0 2px var(--accent); }
+    .swatch[data-c="purple"] { background: #6c63ff; }
+    .swatch[data-c="blue"]   { background: #2196f3; }
+    .swatch[data-c="green"]  { background: #00c776; }
+    .swatch[data-c="orange"] { background: #ff9800; }
+    .swatch[data-c="pink"]   { background: #e91e8c; }
+
+    /* ===== LAYOUT ===== */
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 108px 22px 60px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      gap: 42px;
+      align-items: center;
+      background: var(--bg-card);
+      border-radius: 28px;
+      padding: 46px 50px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -70px; right: -70px;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+      opacity: 0.12; pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -70px; left: -50px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, var(--accent2) 0%, transparent 70%);
+      opacity: 0.10; pointer-events: none;
+    }
+
+    .profile-pic-wrap { position: relative; flex-shrink: 0; }
+    .profile-ring {
+      width: 175px; height: 175px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--glow);
+    }
+    .profile-pic {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border: 4px solid var(--bg-card);
+    }
+    .status-dot {
+      position: absolute; bottom: 10px; right: 10px;
+      width: 18px; height: 18px;
+      background: #43e97b;
+      border-radius: 50%;
+      border: 3px solid var(--bg-card);
+      box-shadow: 0 0 12px #43e97b99;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity:1; }
+      50%      { transform: scale(1.3); opacity:0.65; }
+    }
+
+    .hero-info { flex: 1; }
+    .hero-name {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-title {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .badge i { color: var(--accent); font-size: 0.85rem; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .contact-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    }
+    .contact-chip:hover { transform: translateY(-2px); box-shadow: 0 7px 26px rgba(0,0,0,0.28); }
+
+    /* ===== GRIDS ===== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.55s ease both;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 50px rgba(108,99,255,0.22); }
+    .card-accent-bar {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 22px 22px 0 0;
+    }
+    .card-title {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-title i { font-size: 1rem; }
+
+    /* Objective */
+    .objective-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    /* Experience */
+    .exp-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .exp-details h4 { font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
+    .exp-details span { font-size: 0.82rem; color: var(--text-secondary); }
+    .exp-duration {
+      margin-left: auto;
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px 13px;
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 700;
+      white-space: nowrap;
+      align-self: center;
+    }
+    [dir="rtl"] .exp-duration { margin-left: 0; margin-right: auto; }
+
+    /* Education */
+    .edu-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 18px; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .edu-details h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .edu-details p  { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5; }
+
+    /* Languages */
+    .lang-item { margin-bottom: 20px; }
+    .lang-item:last-child { margin-bottom: 0; }
+    .lang-header {
+      display: flex; justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.92rem; font-weight: 600;
+    }
+    .lang-level { color: var(--accent); font-size: 0.82rem; font-weight: 700; }
+    .lang-bar-bg {
+      background: var(--bg-card2);
+      border-radius: 100px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .lang-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    /* Skills */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 7px 17px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.22s;
+      cursor: default;
+    }
+    .skill-tag:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-2px); }
+
+    /* Info Grid */
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .info-item {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg-card2);
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+    }
+    .info-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 0.88rem; flex-shrink: 0;
+    }
+    .info-label { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 1px; }
+    .info-value { font-size: 0.88rem; font-weight: 600; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      padding: 28px 0 0;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+    .footer span { color: var(--accent); font-weight: 700; }
+
+    /* Responsive */
+    @media (max-width: 780px) {
+      .hero { flex-direction: column; text-align: center; padding: 30px 22px; gap: 24px; }
+      .hero-badges, .contact-row { justify-content: center; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .toolbar { padding: 10px 14px; }
+      .hero-name { font-size: 1.9rem; }
+      .toolbar-brand { display: none; }
+    }
+
+    /* Animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .card:nth-child(2) { animation-delay: 0.07s; }
+    .card:nth-child(3) { animation-delay: 0.14s; }
+    .card:nth-child(4) { animation-delay: 0.21s; }
+  </style>
+</head>
+<body data-theme="dark" data-color="purple">
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="toolbar-brand">✦ Idris Jabbar Karim</div>
+  <div class="toolbar-right">
+    <div class="color-swatches">
+      <div class="swatch active" data-c="purple" onclick="setColor('purple',this)" title="Purple"></div>
+      <div class="swatch" data-c="blue"   onclick="setColor('blue',this)"   title="Blue"></div>
+      <div class="swatch" data-c="green"  onclick="setColor('green',this)"  title="Green"></div>
+      <div class="swatch" data-c="orange" onclick="setColor('orange',this)" title="Orange"></div>
+      <div class="swatch" data-c="pink"   onclick="setColor('pink',this)"   title="Pink"></div>
+    </div>
+    <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">🌐 Kurdish</button>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="profile-pic-wrap">
+      <div class="profile-ring">
+        <img src="profile.png" alt="Idris Jabbar Karim" class="profile-pic"/>
+      </div>
+      <div class="status-dot"></div>
+    </div>
+    <div class="hero-info">
+      <div class="hero-name" data-en="Idris Jabbar Karim" data-ku="ئیدریس جەبار کەریم">
+        Idris Jabbar Karim
+      </div>
+      <div class="hero-title"
+           data-en="Student · Information Management Systems<br>Erbil Polytechnic University"
+           data-ku="خوێندکار · سیستەمی زانیاری کارگێڕی کار<br>پەیمانگای پۆلی تەکنیکی هەولێر">
+        Student · Information Management Systems<br>Erbil Polytechnic University
+      </div>
+      <div class="hero-badges">
+        <div class="badge">
+          <i class="fa-solid fa-location-dot"></i>
+          <span data-en="Erbil, Kurdistan" data-ku="هەولێر، کوردستان">Erbil, Kurdistan</span>
+        </div>
+        <div class="badge">
+          <i class="fa-solid fa-cake-candles"></i>
+          <span data-en="Age 22 · Born 25/7/2004" data-ku="تەمەن ٢٢ · لەدایکبوون ٢٥/٧/٢٠٠٤">Age 22 · Born 25/7/2004</span>
+        </div>
+        <div class="badge">
+          <i class="fa-solid fa-briefcase"></i>
+          <span data-en="4 Years Experience" data-ku="٤ ساڵ ئەزموون">4 Years Experience</span>
+        </div>
+      </div>
+      <div class="contact-row">
+        <a class="contact-chip" href="tel:07506388681">
+          <i class="fa-solid fa-phone"></i> 0750 638 8681
+        </a>
+        <a class="contact-chip" href="mailto:edresjabbar@gmail.com">
+          <i class="fa-solid fa-envelope"></i> edresjabbar@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 1 -->
+  <div class="grid-2">
+    <!-- OBJECTIVE -->
+    <div class="card">
+      <div class="card-accent-bar"></div>
+      <div class="card-title">
+        <i class="fa-solid fa-bullseye"></i>
+        <span data-en="Objective" data-ku="ئامانج">Objective</span>
+      </div>
+      <p class="objective-text"
+         data-en="My goal is to advance Kurdistan and improve the quality of life for its citizens. I am driven by a passion for technology, information systems, and building meaningful digital solutions that serve society and create a better future for all."
+         data-ku="ئامانجم بەرەوپێش بردنی کوردستانە لە پێناو خۆشگوزەرانکردنی هاوڵاتیان. ئارەزووم بە بواری تەکنەلۆژیا، سیستەمی زانیاری و دروستکردنی چارەسەری دیجیتاڵی کارئامەز بۆ خزمەتگوزاری کۆمەڵگا و دروستکردنی داهاتووێکی باشتر بۆ هەموانە.">
+        My goal is to advance Kurdistan and improve the quality of life for its citizens. I am driven by a passion for technology, information systems, and building meaningful digital solutions that serve society and create a better future for all.
+      </p>
+    </div>
+
+    <!-- PERSONAL INFO -->
+    <div class="card">
+      <div class="card-accent-bar"></div>
+      <div class="card-title">
+        <i class="fa-solid fa-id-card"></i>
+        <span data-en="Personal Info" data-ku="زانیاری کەسی">Personal Info</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-calendar-days"></i></div>
+          <div>
+            <div class="info-label" data-en="Date of Birth" data-ku="ڕێکەوتی لەدایکبوون">Date of Birth</div>
+            <div class="info-value">25 / 7 / 2004</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+          <div>
+            <div class="info-label" data-en="Age" data-ku="تەمەن">Age</div>
+            <div class="info-value" data-en="22 Years" data-ku="٢٢ ساڵ">22 Years</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="info-label" data-en="Location" data-ku="شوێن">Location</div>
+            <div class="info-value" data-en="Erbil, Kurdistan" data-ku="هەولێر، کوردستان">Erbil, Kurdistan</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <div class="info-label" data-en="Phone" data-ku="مۆبایل">Phone</div>
+            <div class="info-value" style="font-size:0.8rem">0750 638 8681</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="grid-2">
+    <!-- EDUCATION -->
+    <div class="card">
+      <div class="card-accent-bar"></div>
+      <div class="card-title">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span data-en="Education" data-ku="بڕوانامە">Education</span>
+      </div>
+      <div class="edu-item">
+        <div class="edu-icon"><i class="fa-solid fa-university"></i></div>
+        <div class="edu-details">
+          <h4 data-en="Information Management Systems" data-ku="سیستەمی زانیاری کارگێڕی کار">Information Management Systems</h4>
+          <p data-en="Erbil Polytechnic University" data-ku="پەیمانگای پۆلی تەکنیکی هەولێر">Erbil Polytechnic University</p>
+          <p style="margin-top:5px; color:var(--accent); font-size:0.8rem; font-weight:700;"
+             data-en="Currently Enrolled" data-ku="ئێستاش خوێندکارە">Currently Enrolled</p>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-icon"><i class="fa-solid fa-school"></i></div>
+        <div class="edu-details">
+          <h4 data-en="12th Grade — Scientific Branch" data-ku="قۆناغی ١٢ — لقی زانستی">12th Grade — Scientific Branch</h4>
+          <p data-en="High School Certificate" data-ku="بڕوانامەی قۆناغی ١٢">High School Certificate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="card">
+      <div class="card-accent-bar"></div>
+      <div class="card-title">
+        <i class="fa-solid fa-briefcase"></i>
+        <span data-en="Experience" data-ku="ئەزموونی کار">Experience</span>
+      </div>
+      <div class="exp-item">
+        <div class="exp-icon"><i class="fa-solid fa-store"></i></div>
+        <div class="exp-details">
+          <h4 data-en="Sales Representative" data-ku="فرۆشیار">Sales Representative</h4>
+          <span data-en="Retail Sales · Customer Relations · Negotiation" data-ku="فرۆشتن · پەیوەندی کڕیار · مامەڵەکردن">Retail Sales · Customer Relations · Negotiation</span>
+        </div>
+        <div class="exp-duration" data-en="4 Yrs" data-ku="٤ ساڵ">4 Yrs</div>
+      </div>
+      <div style="margin-top:20px;">
+        <div class="skills-grid">
+          <span class="skill-tag" data-en="Customer Service" data-ku="خزمەتگوزاری کڕیار">Customer Service</span>
+          <span class="skill-tag" data-en="Sales Strategy" data-ku="ستراتیژیای فرۆشتن">Sales Strategy</span>
+          <span class="skill-tag" data-en="Communication" data-ku="پەیوەندی">Communication</span>
+          <span class="skill-tag" data-en="Negotiation" data-ku="مامەڵەکردن">Negotiation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="grid-2">
+    <!-- LANGUAGES -->
+    <div class="card">
+      <div class="card-accent-bar"></div>
+      <div class="card-title">
+        <i class="fa-solid fa-language"></i>
+        <span data-en="Languages" data-ku="زمانەکان">Languages</span>
+      </div>
+      <div class="lang-item">
+        <div class="lang-header">
+          <span data-en="Kurdish" data-ku="کوردی">Kurdish</span>
+          <span class="lang-level" data-en="Native" data-ku="زمانی دایک">Native</span>
+        </div>
+        <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-header">
+          <span data-en="Arabic" data-ku="عەرەبی">Arabic</span>
+          <span class="lang-level" data-en="Good" data-ku="باش">Good</span>
+        </div>
+        <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-header">
+          <span data-en="English" data-ku="ئینگلیزی">English</span>
+          <span class="lang-level" data-en="Good" data-ku="باش">Good</span>
+        </div>
+        <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:72%"></div></div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="card">
+      <div class="card-accent-bar"></div>
+      <div class="card-title">
+        <i class="fa-solid fa-code"></i>
+        <span data-en="Skills &amp; Interests" data-ku="بەتوانایی و بەرژەوەندی">Skills &amp; Interests</span>
+      </div>
+      <div class="skills-grid">
+        <span class="skill-tag" data-en="Information Systems" data-ku="سیستەمی زانیاری">Information Systems</span>
+        <span class="skill-tag" data-en="Microsoft Office" data-ku="مایکرۆسۆفت ئۆفیس">Microsoft Office</span>
+        <span class="skill-tag" data-en="Problem Solving" data-ku="چارەسەرکردنی کێشە">Problem Solving</span>
+        <span class="skill-tag" data-en="Team Work" data-ku="کارکردنی تیمی">Team Work</span>
+        <span class="skill-tag" data-en="Digital Literacy" data-ku="ئاستی دیجیتاڵ">Digital Literacy</span>
+        <span class="skill-tag" data-en="Data Management" data-ku="بەڕێوەبردنی داتا">Data Management</span>
+        <span class="skill-tag" data-en="Community Service" data-ku="خزمەتگوزاری کۆمەڵگا">Community Service</span>
+        <span class="skill-tag" data-en="Leadership" data-ku="سەرکردایەتی">Leadership</span>
+        <span class="skill-tag" data-en="Critical Thinking" data-ku="بیرکردنەوەی رەخنەگر">Critical Thinking</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>
+      <span id="footer-text">Designed with ❤️ — <span>Idris Jabbar Karim</span> · Erbil, Kurdistan · 2024</span>
+    </p>
+  </div>
+
+</div><!-- /page-wrapper -->
+
+<script>
+  let isDark = true;
+  let isEnglish = true;
+
+  function toggleTheme() {
+    isDark = !isDark;
+    document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+  }
+
+  function setColor(color, el) {
+    document.body.setAttribute('data-color', color);
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function toggleLang() {
+    isEnglish = !isEnglish;
+    const lang = isEnglish ? 'en' : 'ku';
+    const dir  = isEnglish ? 'ltr' : 'rtl';
+
+    document.documentElement.setAttribute('lang', isEnglish ? 'en' : 'ku');
+    document.documentElement.setAttribute('dir', dir);
+    document.body.setAttribute('dir', dir);
+    document.getElementById('langBtn').innerHTML = isEnglish ? '🌐 Kurdish' : '🌐 English';
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+
+    // footer
+    const footerText = document.getElementById('footer-text');
+    if (isEnglish) {
+      footerText.innerHTML = 'Designed with ❤️ — <span style="color:var(--accent);font-weight:700">Idris Jabbar Karim</span> · Erbil, Kurdistan · 2024';
+    } else {
+      footerText.innerHTML = 'دیزاینکراوە بە ❤️ — <span style="color:var(--accent);font-weight:700">ئیدریس جەبار کەریم</span> · هەولێر، کوردستان · ٢٠٢٤';
+    }
+  }
+</script>
+</body>
+</html>
+
